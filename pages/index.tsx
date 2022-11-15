@@ -19,7 +19,7 @@ export default function Home(props: Props) {
     props.completedTutorial
   );
 
-  const { login, authState, isAuthenticated } = usePicket();
+  const { login, logout, authState, isAuthenticated } = usePicket();
 
   const handleLogin = useCallback(async () => {
     let auth = authState;
@@ -42,8 +42,11 @@ export default function Home(props: Props) {
     // error
     if (res.status !== 200) return;
 
-    setLoggedIn(true);
     const sbAccessToken = Cookies.get(cookieName);
+    // something went wrong
+    if (!sbAccessToken) return;
+
+    setLoggedIn(true);
     const supabase = getSupabase(sbAccessToken);
 
     // mark "tutorial" completion
@@ -59,6 +62,18 @@ export default function Home(props: Props) {
     if (error) return;
     setCompletedTutorial(true);
   }, [authState, login]);
+
+  const handleLogout = useCallback(async () => {
+    await logout();
+    setLoggedIn(false);
+    setCompletedTutorial(false);
+    await fetch("/api/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }, [logout]);
 
   return (
     <div className={styles.container}>
@@ -138,42 +153,51 @@ export default function Home(props: Props) {
         )}
 
         {loggedIn && completedTutorial && (
-          <div className={styles.grid}>
-            <a href="https://picketapi.com" className={styles.card}>
-              <h2>Sign Up &rarr;</h2>
-              <p>
-                Create an account on Picket to start building web3 auth
-                experiences.
-              </p>
-            </a>
+          <>
+            <div className={styles.grid}>
+              <a href="https://picketapi.com" className={styles.card}>
+                <h2>Sign Up &rarr;</h2>
+                <p>
+                  Create an account on Picket to start building web3 auth
+                  experiences.
+                </p>
+              </a>
 
-            <a href="https://docs.picketapi.com/" className={styles.card}>
-              <h2>Documentation &rarr;</h2>
-              <p>
-                Find in-depth information about Picket&apos;s features and API.
-              </p>
-            </a>
+              <a href="https://docs.picketapi.com/" className={styles.card}>
+                <h2>Documentation &rarr;</h2>
+                <p>
+                  Find in-depth information about Picket&apos;s features and
+                  API.
+                </p>
+              </a>
 
-            <a
-              href="https://github.com/picketapi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.card}
-            >
-              <h2>Examples &rarr;</h2>
-              <p>Discover and deploy boilerplate example Picket projects.</p>
-            </a>
+              <a
+                href="https://github.com/picketapi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                <h2>Examples &rarr;</h2>
+                <p>Discover and deploy boilerplate example Picket projects.</p>
+              </a>
 
-            <a
-              href="https://docs.picketapi.com/picket-docs/reference/integrations"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.card}
-            >
-              <h2>Integrate &rarr;</h2>
-              <p>Learn how to integrate Picket into your own app or website.</p>
-            </a>
-          </div>
+              <a
+                href="https://docs.picketapi.com/picket-docs/reference/integrations"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                <h2>Integrate &rarr;</h2>
+                <p>
+                  Learn how to integrate Picket into your own app or website.
+                </p>
+              </a>
+            </div>
+            <br />
+            <button className={styles.button} onClick={() => handleLogout()}>
+              Log Out to Switch Wallets
+            </button>
+          </>
         )}
       </main>
     </div>
