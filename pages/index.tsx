@@ -15,9 +15,8 @@ type Props = {
 
 export default function Home(props: Props) {
   const { loggedIn } = props;
-  const router = useRouter();
-
   const { login, logout, authState } = usePicket();
+  const router = useRouter();
 
   const handleLogin = useCallback(async () => {
     let auth = authState;
@@ -25,7 +24,7 @@ export default function Home(props: Props) {
       auth = await login();
     }
 
-    // error
+    // login failed
     if (!auth) return;
 
     // create a supabase access token

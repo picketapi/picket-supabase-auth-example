@@ -178,7 +178,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
       .select("*"));
 
     if (error) {
-      // logout the user and redirect home
+      // log error and redirect home
+      console.error(error);
       return {
         redirect: {
           destination: "/",
