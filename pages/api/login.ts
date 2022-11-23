@@ -13,7 +13,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { accessToken } = req.body;
-  const payload = await picket.validate(accessToken);
+  // omit expiration time
+  // @ts-ignore
+  const { exp, ...payload } = await picket.validate(accessToken);
 
   const supabaseJWT = jwt.sign(
     {
