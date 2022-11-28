@@ -70,7 +70,7 @@ export default function Todos(props: Props) {
               style={{
                 margin: "8px 0",
                 display: "flex",
-                alignItems: "start",
+                alignItems: "center",
               }}
             >
               <input
@@ -93,7 +93,7 @@ export default function Todos(props: Props) {
               />
               <span
                 style={{
-                  margin: "0 0 0 4px",
+                  margin: "0 0 0 8px",
                 }}
               >
                 {todo.name}
