@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@picketapi/picket-node": "^0.0.10",
+    "@picketapi/picket-node": "^0.0.11",
     "@picketapi/picket-react": "^0.0.75",
     "@supabase/supabase-js": "^2.1.0",
     "@types/node": "18.11.9",

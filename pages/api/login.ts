@@ -8,13 +8,14 @@ import { cookieName } from "../../utils/supabase";
 // create picket node client with your picket secret api key
 const picket = new Picket(process.env.PICKET_PROJECT_SECRET_KEY!);
 
+const expToExpiresIn = (exp: number) => exp - Math.floor(Date.now() / 1000);
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const { accessToken } = req.body;
-  // omit expiration time
-  // @ts-ignore
+  // omit expiration time,.it will conflict with jwt.sign
   const { exp, ...payload } = await picket.validate(accessToken);
 
   const supabaseJWT = jwt.sign(
@@ -23,7 +24,7 @@ export default async function handler(
     },
     process.env.SUPABASE_JWT_SECRET!,
     {
-      expiresIn: "1 day",
+      expiresIn: expToExpiresIn(exp),
     }
   );
 
@@ -39,6 +40,5 @@ export default async function handler(
       maxAge: 60 * 60 * 24, // 1 day
     })
   );
-
   res.status(200).json({});
 }
