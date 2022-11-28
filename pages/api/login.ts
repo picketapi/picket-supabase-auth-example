@@ -38,7 +38,7 @@ export default async function handler(
       // allow the cookie to be accessed client-side
       httpOnly: false,
       sameSite: "strict",
-      maxAge: expiresIn, // 1 day
+      maxAge: expiresIn,
     })
   );
   res.status(200).json({});
