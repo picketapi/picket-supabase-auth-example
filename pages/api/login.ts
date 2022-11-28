@@ -17,6 +17,7 @@ export default async function handler(
   const { accessToken } = req.body;
   // omit expiration time,.it will conflict with jwt.sign
   const { exp, ...payload } = await picket.validate(accessToken);
+  const expiresIn = expToExpiresIn(exp);
 
   const supabaseJWT = jwt.sign(
     {
@@ -24,7 +25,7 @@ export default async function handler(
     },
     process.env.SUPABASE_JWT_SECRET!,
     {
-      expiresIn: expToExpiresIn(exp),
+      expiresIn,
     }
   );
 
@@ -37,7 +38,7 @@ export default async function handler(
       // allow the cookie to be accessed client-side
       httpOnly: false,
       sameSite: "strict",
-      maxAge: 60 * 60 * 24, // 1 day
+      maxAge: expiresIn, // 1 day
     })
   );
   res.status(200).json({});
