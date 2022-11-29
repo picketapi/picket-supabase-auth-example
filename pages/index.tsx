@@ -58,6 +58,11 @@ export default function Home(props: Props) {
         <title>Picket 💜 Supabase</title>
       </Head>
 
+      <header className={styles.header}>
+        <a href="https://github.com/picketapi/picket-supabase-auth-example">
+          View on Github
+        </a>
+      </header>
       <main className={styles.main}>
         <h1 className={styles.title}>
           <span className={styles.titleDemo}>Demo of</span>

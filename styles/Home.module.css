@@ -1,5 +1,23 @@
 .container {
   padding: 0 2rem;
+  position: relative;
+}
+
+.header {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+
+  top: 0;
+  left: 0;
+}
+
+.header a {
+  color: #979797;
+  font-weight: 600;
 }
 
 .main {
