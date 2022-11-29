@@ -42,28 +42,47 @@ export default function Todos(props: Props) {
         <h1 className={styles.title}>Your Personal Todo List</h1>
         <div
           style={{
-            maxWidth: "600px",
+            width: "600px",
             textAlign: "left",
             fontSize: "1.125rem",
             margin: "36px 0 24px 0",
+            backgroundColor: "#efefef",
+            padding: "24px",
+            borderRadius: "20px",
           }}
         >
-          <p>Welcome {displayWalletAddress(walletAddress)},</p>
+          <h2
+            style={{
+              fontWeight: 600,
+              marginBottom: "12px",
+            }}
+          >
+            Welcome {displayWalletAddress(walletAddress)},
+          </h2>
           <p>
             Your todo list is stored in Supabase and are only accessible to you
-            and your wallet address. Supabase + Picket makes it easy to build
-            scalable, hybrid web2 and web3 apps. Use Supabase to store
-            non-critical or private data off-chain like user app preferences or
-            todo lists.
+            and your wallet address. Use Supabase to store non-critical or
+            private data off-chain like user app preferences or todo lists.
           </p>
         </div>
         <div
           style={{
+            width: "600px",
             textAlign: "left",
             fontSize: "1.125rem",
+            backgroundColor: "#efefef",
+            padding: "24px",
+            borderRadius: "20px",
           }}
         >
-          <h2>Todo List</h2>
+          <h2
+            style={{
+              fontWeight: 600,
+              marginBottom: "12px",
+            }}
+          >
+            Todo List
+          </h2>
           {todos.map((todo) => (
             <div
               key={todo.name}
@@ -100,20 +119,23 @@ export default function Todos(props: Props) {
               </span>
             </div>
           ))}
-          <div
+        </div>
+        <div
+          style={{
+            width: "600px",
+            margin: "24px 0",
+            fontSize: "1.125rem",
+            color: "#5469d4",
+          }}
+        >
+          <Link
+            href={"/"}
             style={{
-              margin: "24px 0",
+              textDecoration: "underline",
             }}
           >
-            <Link
-              href={"/"}
-              style={{
-                textDecoration: "underline",
-              }}
-            >
-              Go back home &rarr;
-            </Link>
-          </div>
+            Go back home &rarr;
+          </Link>
         </div>
       </main>
     </div>
