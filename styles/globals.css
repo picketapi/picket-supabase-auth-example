@@ -1,9 +1,35 @@
+@import url("https://rsms.me/inter/inter.css");
+
+@font-face {
+  font-family: "GT Haptik";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+
+  src: url("https://picketapi.com/fonts/GT Haptik/GT-Haptik-Regular.woff2")
+      format("woff2"),
+    url("https://picketapi.com/fonts/GT Haptik/GT-Haptik-Regular.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "GT Haptik";
+  font-style: medium;
+  font-weight: 500;
+  font-display: swap;
+
+  src: url("https://picketapi.com/fonts/GT Haptik/GT-Haptik-Medium.woff2")
+      format("woff2"),
+    url("https://picketapi.com/fonts/GT Haptik/GT-Haptik-Medium.woff")
+      format("woff");
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -13,14 +39,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
 }

@@ -1,5 +1,23 @@
 .container {
   padding: 0 2rem;
+  position: relative;
+}
+
+.header {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+
+  top: 0;
+  left: 0;
+}
+
+.header a {
+  color: #979797;
+  font-weight: 600;
 }
 
 .main {
@@ -29,20 +47,57 @@
 }
 
 .title a {
-  color: #0070f3;
   text-decoration: none;
+}
+
+.titleDemo {
+  font-size: 2.5rem;
+  text-align: center;
+
+  margin-bottom: 28px;
+}
+
+.titleCompanies {
+  text-align: center;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.titlePicket {
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.75rem;
+
+  width: 350px;
+}
+
+.titlePlus {
+  color: #979797;
 }
 
 .title a:hover,
 .title a:focus,
 .title a:active {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .title {
   margin: 0;
   line-height: 1.15;
+  font-family: "GT Haptik", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 4rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .title,
@@ -53,7 +108,7 @@
 .description {
   margin: 4rem 0;
   line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   max-width: 600px;
 }
 
@@ -84,23 +139,27 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
+
+  background-color: #efefef;
 }
 
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #5469d4;
+  border-color: #5469d4;
+  background-color: #fff;
 }
 
 .card h2 {
   margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
@@ -110,15 +169,74 @@
 }
 
 .button {
-  background: #0070f3;
-  border: 1px solid #0070f3;
-  border-radius: 5px;
+  background: #5469d4;
+  border: none;
+  border-radius: 50px;
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
   transition: all 0.2s ease;
+}
+
+.buttonLg {
+  background: #5469d4;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  transition: all 0.2s ease;
+}
+
+.loginSection {
+  margin: 64px auto;
+}
+
+.infoSection {
+  color: #414552;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  width: 650px;
+
+  font-size: 1rem;
+}
+
+.infoBlock {
+  width: 100%;
+
+  background-color: #efefef;
+  padding: 24px 32px;
+
+  border: none;
+  border-radius: 20px;
+}
+
+.infoBlock h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.infoBlock p {
+  line-height: 1.5;
+}
+
+.infoBlock a {
+  font-weight: 600;
+  color: #5469d4;
+}
+
+.supabaseGreen {
+  color: #34b27b !important;
 }
 
 @media (max-width: 600px) {
@@ -128,15 +246,20 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
+@media (max-width: 876px) {
+  .titleCompanies {
+    flex-flow: column nowrap;
+    gap: 0.25rem;
   }
-  .code {
-    background: #111;
+
+  .titlePicket {
+    justify-content: center;
   }
-  .logo img {
-    filter: invert(1);
-  }
+}
+
+.divider {
+  width: 66%;
+  height: 1px;
+  background-color: #efefef;
+  margin: 24px 0;
 }
