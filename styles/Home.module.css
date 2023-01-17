@@ -205,7 +205,7 @@
   align-items: center;
   gap: 2rem;
 
-  width: 650px;
+  max-width: 650px;
 
   font-size: 1rem;
 }
