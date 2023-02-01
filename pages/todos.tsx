@@ -163,8 +163,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   // check if logged in user has completed the tutorial
   const supabase = getSupabase(accessToken);
-  const { walletAddress } = jwt.decode(accessToken) as {
-    walletAddress: string;
+
+  const {
+    app_metadata: { walletAddress },
+  } = jwt.decode(accessToken) as {
+    app_metadata: { walletAddress: string };
   };
 
   // get todos for the users

@@ -22,4 +22,13 @@ const getSupabase = (accessToken: string) => {
   return supabase;
 };
 
+export const getSupabaseAdminClient = () => {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  return supabase;
+};
+
 export { getSupabase };
