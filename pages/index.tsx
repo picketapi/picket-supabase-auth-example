@@ -3,7 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useDisconnect } from "wagmi";
 
 import styles from "../styles/Home.module.css";
 
@@ -16,7 +18,8 @@ type Props = {
 
 export default function Home(props: Props) {
   const { loggedIn } = props;
-  const { login, logout, authState } = usePicket();
+  const { login, logout, authState, isAuthenticating } = usePicket();
+  const { disconnectAsync } = useDisconnect();
   const router = useRouter();
 
   const handleLogin = useCallback(async () => {
@@ -41,6 +44,7 @@ export default function Home(props: Props) {
   }, [authState, login, router]);
 
   const handleLogout = useCallback(async () => {
+    await disconnectAsync();
     await logout();
     await fetch("/api/logout", {
       method: "POST",
@@ -50,7 +54,19 @@ export default function Home(props: Props) {
     });
     // refresh the page
     router.push("/");
-  }, [logout, router]);
+  }, [logout, router, disconnectAsync]);
+
+  useEffect(() => {
+    if (isAuthenticating) return;
+    if (authState && !loggedIn) {
+      handleLogin();
+      return;
+    }
+    if (!authState && loggedIn) {
+      handleLogout();
+      return;
+    }
+  }, [authState, handleLogin, handleLogout, isAuthenticating, loggedIn]);
 
   return (
     <div className={styles.container}>
@@ -101,9 +117,7 @@ export default function Home(props: Props) {
 
         {!loggedIn && (
           <div className={styles.loginSection}>
-            <button className={styles.buttonLg} onClick={() => handleLogin()}>
-              Log In with Your Wallet
-            </button>
+            <ConnectButton label="Log In with Your Wallet" />
           </div>
         )}
         {loggedIn && (
