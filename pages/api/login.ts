@@ -23,7 +23,7 @@ const getOrCreateUser = async (payload: AuthenticatedUser) => {
 
   const userID = userWallet?.user_id;
   if (!userID) {
-    let { data, error } = await supabase.auth.admin.createUser({
+    let { data } = await supabase.auth.admin.createUser({
       // @ts-ignore
       email: payload.email,
       app_metadata: {
@@ -41,7 +41,7 @@ const getOrCreateUser = async (payload: AuthenticatedUser) => {
     return data?.user;
   }
 
-  let { data, error } = await supabase.auth.admin.getUserById(userID);
+  let { data } = await supabase.auth.admin.getUserById(userID);
   return data?.user;
 };
 
